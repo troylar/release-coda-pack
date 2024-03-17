@@ -5,6 +5,7 @@ async function run() {
   try {
     const packPath = core.getInput("packPath");
     const codaApiToken = core.getInput("codaApiToken");
+    const packVersion = core.getInput("packVersion");
     const notes = core.getInput("notes").replace(/\n/g, "\\n");
 
     if (!codaApiToken) {
@@ -16,6 +17,9 @@ async function run() {
     }
 
     let releasingLogMessage = [`Releasing pack ${packPath}`];
+    if (packVersion) {
+      releasingLogMessage.push(`with version ${packVersion}`);
+    }
     if (notes) {
       releasingLogMessage.push(`and notes ${notes}`);
     }
@@ -41,6 +45,7 @@ async function run() {
         "coda",
         "release",
         packPath,
+        packVersion,
         "--apiToken",
         codaApiToken,
         "--notes",
