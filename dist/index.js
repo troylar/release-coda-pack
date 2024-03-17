@@ -4094,7 +4094,7 @@ async function run() {
   try {
     const packPath = core.getInput("packPath");
     const codaApiToken = core.getInput("codaApiToken");
-    const notes = core.getInput("notes");
+    const notes = core.getInput("notes").replace(/\\n/g, "\n");
 
     if (!codaApiToken) {
       throw new Error("Missing Coda API token");
@@ -4124,7 +4124,6 @@ async function run() {
     };
 
     // handle properly if notes is multiline
-    notes = notes.replace(/\n/g, "\\n");
     await exec.exec(
       "npx",
       [
