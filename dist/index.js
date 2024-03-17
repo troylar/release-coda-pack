@@ -4124,6 +4124,7 @@ async function run() {
     };
 
     // handle properly if notes is multiline
+    notes = notes.replace(/\n/g, "\\n");
     await exec.exec(
       "npx",
       [
@@ -4137,7 +4138,6 @@ async function run() {
       ],
       options
     );
-
     if (codaError) {
       throw new Error(`Coda release failed with error: ${codaError}`);
     }
