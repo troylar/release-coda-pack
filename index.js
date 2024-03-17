@@ -49,7 +49,7 @@ async function run() {
         "--apiToken",
         codaApiToken,
         "--notes",
-        `"${notes}"`,
+        notes,
       ],
       options
     );
