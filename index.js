@@ -35,7 +35,7 @@ async function run() {
       },
     };
 
-    await exec.exec('npx', ['coda', 'release', packPath, '--notes', `"${notes}"`, '--apiToken', codaApiToken], options);
+    await exec.exec('npx', ['coda', 'release', packPath, '--apiToken', codaApiToken, '--notes', `"${notes}"`], options);
 
     if (codaError) {
       throw new Error(`Coda release failed with error: ${codaError}`);
