@@ -3,7 +3,7 @@ description: "Release an uploaded Coda pack"
 branding:
   color: "orange"
   icon: "package"
-author: "Sirius Nottin"
+author: "Troy Larson"
 
 inputs:
   packPath:

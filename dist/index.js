@@ -4095,7 +4095,8 @@ async function run() {
     const packPath = core.getInput("packPath");
     const codaApiToken = core.getInput("codaApiToken");
     const packVersion = core.getInput("packVersion");
-    const notes = core.getInput("notes");
+    // if notes is empty then "no release notes provided" will be used
+    const notes = core.getInput("notes") || "no release notes provided";
 
     if (!codaApiToken) {
       throw new Error("Missing Coda API token");
