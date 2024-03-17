@@ -5,7 +5,7 @@ async function run() {
   try {
     const packPath = core.getInput("packPath");
     const codaApiToken = core.getInput("codaApiToken");
-    const notes = core.getInput("notes").replace(/\\n/g, "\n");
+    const notes = core.getInput("notes").replace(/\n/g, "\\\n");
 
     if (!codaApiToken) {
       throw new Error("Missing Coda API token");
