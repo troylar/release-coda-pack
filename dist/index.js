@@ -4092,27 +4092,26 @@ const exec = __nccwpck_require__(94);
 
 async function run() {
   try {
-    const packPath = core.getInput('packPath');
-    const codaApiToken = core.getInput('codaApiToken');
-    const notes = core.getInput('notes');
-
+    const packPath = core.getInput("packPath");
+    const codaApiToken = core.getInput("codaApiToken");
+    const notes = core.getInput("notes");
 
     if (!codaApiToken) {
-      throw new Error('Missing Coda API token');
+      throw new Error("Missing Coda API token");
     }
 
     if (!notes) {
-      throw new Error('Missing release notes');
+      throw new Error("Missing release notes");
     }
 
     let releasingLogMessage = [`Releasing pack ${packPath}`];
     if (notes) {
       releasingLogMessage.push(`and notes ${notes}`);
     }
-    core.info(releasingLogMessage.join(' '));
+    core.info(releasingLogMessage.join(" "));
 
-    let codaOutput = '';
-    let codaError = '';
+    let codaOutput = "";
+    let codaError = "";
     const options = {
       listeners: {
         stdout: (data) => {
@@ -4124,12 +4123,24 @@ async function run() {
       },
     };
 
-    await exec.exec('npx', ['coda', 'release', packPath, '--apiToken', codaApiToken, '--notes', `"${notes}"`], options);
+    // handle properly if notes is multiline
+    await exec.exec(
+      "npx",
+      [
+        "coda",
+        "release",
+        packPath,
+        "--apiToken",
+        codaApiToken,
+        "--notes",
+        notes,
+      ],
+      options
+    );
 
     if (codaError) {
       throw new Error(`Coda release failed with error: ${codaError}`);
     }
-
   } catch (error) {
     core.setFailed(`Action failed with error ${error} `);
   }
