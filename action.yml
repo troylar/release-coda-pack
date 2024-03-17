@@ -13,9 +13,6 @@ inputs:
   codaApiToken:
     description: 'The Coda API token to use'
     required: true
-  packVersion:
-    description: 'The uploaded version of the Coda pack to release'
-    required: false
   notes:
     description: 'The release notes for the Coda pack'
     required: true
