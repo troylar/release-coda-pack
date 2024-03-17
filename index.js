@@ -5,7 +5,6 @@ async function run() {
   try {
     const packPath = core.getInput('packPath');
     const codaApiToken = core.getInput('codaApiToken');
-    const packVersion = core.getInput('packVersion');
     const notes = core.getInput('notes');
 
 
@@ -18,9 +17,6 @@ async function run() {
     }
 
     let releasingLogMessage = [`Releasing pack ${packPath}`];
-    if (packVersion) {
-      releasingLogMessage.push(`with version ${packVersion}`);
-    }
     if (notes) {
       releasingLogMessage.push(`and notes ${notes}`);
     }
@@ -39,7 +35,7 @@ async function run() {
       },
     };
 
-    await exec.exec('npx', ['coda', 'release', packPath, packVersion, notes, '--apiToken', codaApiToken], options);
+    await exec.exec('npx', ['coda', 'release', packPath, '--notes', notes, '--apiToken', codaApiToken], options);
 
     if (codaError) {
       throw new Error(`Coda release failed with error: ${codaError}`);
