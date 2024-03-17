@@ -4110,33 +4110,16 @@ async function run() {
     }
     core.info(releasingLogMessage.join(" "));
 
-    let codaOutput = "";
-    let codaError = "";
-    const options = {
-      listeners: {
-        stdout: (data) => {
-          codaOutput += data.toString();
-        },
-        stderr: (data) => {
-          codaError += data.toString();
-        },
-      },
-    };
-
     // handle properly if notes is multiline
-    await exec.exec(
-      "npx",
-      [
-        "coda",
-        "release",
-        packPath,
-        "--apiToken",
-        codaApiToken,
-        "--notes",
-        `"${notes}"`,
-      ],
-      options
-    );
+    await exec.exec("npx", [
+      "coda",
+      "release",
+      packPath,
+      "--apiToken",
+      codaApiToken,
+      "--notes",
+      `"${notes}"`,
+    ]);
     if (codaError) {
       throw new Error(`Coda release failed with error: ${codaError}`);
     }
